@@ -30,8 +30,11 @@ sample = sqlContext.sql('SELECT * FROM logs LIMIT 10').collect()
 print sample
 # find 10 most popular url's
 url_access = sqlContext.sql("SELECT url, count(*) as counts FROM logs GROUP BY url ORDER BY counts DESC LIMIT 10").collect()
-
-#10 highest traffic sources
+print url_access
+# 10 highest traffic sources
 ip_access = sqlContext.sql("SELECT ip, count(*) as counts FROM logs GROUP BY ip ORDER BY counts DESC LIMIT 10").collect()
 print ip_access
-
+# same operation without sparkSQL
+ip_access_direct = schema_dicts.map(lambda row: (row['ip'], 1)).reduceByKey(lambda a,b: a+b).map(
+ lambda r: (r[1], r[0])).sortByKey(ascending=False).map(lambda r: (r[1], r[0])).collect()
+print ip_access_direct[:10]
