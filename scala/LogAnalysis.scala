@@ -9,7 +9,7 @@ val sc = SparkContext("spark://master:7077", "Log Analysis")
 val sqlContext = new SQLContext(sc)
 import sqlContext.createSchemaRDD
 
-val log_file = sc.textFile("hdfs://master:9000/user/hdfs/log_file.log")
+val log_file = sc.textFile("../data/log_file.txt")
 val pattern = Pattern.compile("([^\"]\\S*|\".+?\")\\s*")
 case class LogSchema(ip: String, date: String, url: String, status: String, time: String)
 

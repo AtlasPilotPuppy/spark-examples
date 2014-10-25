@@ -14,7 +14,7 @@ case class DividendRecord(exchange: String, symbol: String, date: String, divide
 def parseDividend(row: Array[String]) = new DividendRecord(row(0), row(1), row(2), row(3).toDouble)
 
 // Create RDD with file contents                                                                                                                                                                                                                                           
-val dividends = sc.textFile("hdfs://master:9000/user/hdfs/NYSE_dividends_A.csv")
+val dividends = sc.textFile("../data/NYSE_dividends_A.csv")
 // filter header from the dataset, then split the rows on ',' and create an rdd on class DividendRecord                                                                                                                                                                    
 val div_schema = dividends.filter(!_.startsWith("exchange")).map(_.split(",")).map(parseDividend(_))
 //Register the rdd as a table                                                                                                                                                                                                                                              
@@ -25,7 +25,7 @@ val result = sqlContext.sql("SELECT * FROM div").collect()
 val result = sqlContext.sql("SELECT * FROM div where exchange='NYSE'").collect()
 
 // Read second file                                                                                                                                                                                                                                                        
-val daily_prices = sc.textFile("hdfs://master:9000/user/hdfs/NYSE_daily_prices_A.csv")
+val daily_prices = sc.textFile("../data/NYSE_daily_prices_A.csv")
 
 case class DailyPricesRecord(exchange: String, symbol: String, date: String, price_open: Double, price_high: Double, price_low: Double, price_close: Double, stock_volume: Double, price_adj_close: Double)
 def parseDailyPrices(row: Array[String]) = new DailyPricesRecord(row(0), row(1), row(2), row(3).toDouble, row(4).toDouble, row(5).toDouble, row(6).toDouble, row(7).toDouble, row(8).toDouble)

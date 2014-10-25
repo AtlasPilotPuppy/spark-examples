@@ -9,7 +9,7 @@ from pyspark.sql import Row, StructField, StructType, StringType, IntegerType
 sc = SparkContext('spark://master:7077', 'Spark SQL Intro')
 sqlContext = SQLContext(sc)
 
-log_file = sc.textFile("../data/log_file.log")
+log_file = sc.textFile("../data/log_file.txt")
 splits = log_file.map(lambda row: shlex.split(row))
 
 def create_schema(row):
