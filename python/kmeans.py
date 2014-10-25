@@ -7,7 +7,7 @@ import numpy as np
 from pyspark.mllib.clustering import KMeans
 import matplotlib.pyplot as plt
 
-gpa_data = sc.textFile("/home/anant/projects/spark-examples/data/student.txt")
+gpa_data = sc.textFile("../data/student.txt")
 gpa_data.cache()
 gpa_data.take(5)
 

@@ -7,7 +7,7 @@ import numpy as np
 from pyspark.mllib.clustering import KMeans
 import matplotlib.pyplot as plt
 
-random_points = sc.textFile("/home/anant/projects/spark-examples/data/random_points.csv")
+random_points = sc.textFile("../data/random_points.csv")
 random_points.cache()
 random_points.takeSample(True, 5)
 

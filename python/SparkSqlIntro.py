@@ -4,7 +4,7 @@ from pyspark.sql import Row, StructField, StructType, StringType, IntegerType
 
 sc = SparkContext('spark://master:7077', 'Spark SQL Intro')
 sqlContext = SQLContext(sc)
-dividends = sc.textFile("hdfs://master:9000/user/hdfs/NYSE_dividends_A.csv")
+dividends = sc.textFile("../data/NYSE_dividends_A.csv")
 dividends_parsed = dividends.filter(lambda r: not r.startswith('exchange')).map(lambda r: r.split(',')).map(
   lambda row: {'exchange': row[0], 'stock_symbol': row[1], 'date': row[2], 'dividends': float(row[3])})
 

@@ -9,7 +9,7 @@ from pyspark.mllib.util import MLUtils
 
 # <codecell>
 
-data = MLUtils.loadLibSVMFile(sc, '/home/anant/projects/spark-examples/data/sample_libsvm_data.txt').cache()
+data = MLUtils.loadLibSVMFile(sc, '../data/sample_libsvm_data.txt').cache()
 
 # <codecell>
 

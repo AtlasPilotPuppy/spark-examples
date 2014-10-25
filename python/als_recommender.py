@@ -61,7 +61,7 @@ def computeRmse(model, data, n):
 # <codecell>
 
 # load personal ratings
-user_ratings_file = "/home/anant/projects/spark-examples/personalRatings.txt"
+user_ratings_file = "../personalRatings.txt"
 myRatings = loadRatings(user_ratings_file)
 myRatingsRDD = sc.parallelize(myRatings)
 
@@ -69,13 +69,13 @@ myRatingsRDD = sc.parallelize(myRatings)
 
 # load ratings and movie titles
 # ratings is an RDD of (last digit of timestamp, (userId, movieId, rating))
-ratings_file = "/home/anant/projects/spark-examples/data/movielens/ratings.dat"
+ratings_file = "../data/movielens/ratings.dat"
 ratings = sc.textFile(ratings_file).map(parseRating)
 
 # <codecell>
 
 # movies is an RDD of (movieId, movieTitle)
-movies_file = "/home/anant/projects/spark-examples/data/movielens/movies.dat"
+movies_file = "../data/movielens/movies.dat"
 movies = dict(sc.textFile(movies_file).map(parseMovie).collect())
 
 # <codecell>
