@@ -1,13 +1,22 @@
 spark-examples
 ==============
 
-Spark examples to go with me presentation on 10/25/2014
+Latest version of spark can be downloaded at http://spark.apache.org/downloads.html
 
-This repo contains spark examples in python and scala.
-You could run spark locally, on an aws cluster or on the set of docker containers.
-Spark binary download: https://spark.apache.org/downloads.html
-Spark AWS bootstrap script: s3://support.elasticmapreduce/spark/install-spark
-Docker containers: https://github.com/anantasty/docker-scripts
+to run the spark shell use:
+./bin/spark-shell
 
-The data files on the docker containers have been loaded on hdfs.
-They can be accessed at "hdfs://master:9000/user/hdfs"
+
+The pyspark shell can be started using:
+./bin/pyspark
+
+To run spark with IPython notebook you need to have IPython notebook installed.
+It can be installed using :
+
+pip install ipython
+pip install 'ipython[notebook]'
+
+to run pyspark with ipython notebook:
+
+IPYTHON_OPTS="notebook --pylab inline --notebook-dir=<directory sto store notebooks>" MASTER=local[6] ./bin/pyspark --executor-memory=6G
+
