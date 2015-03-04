@@ -13,11 +13,8 @@ object SparkSqlIntro{
     val sc = new SparkContext(conf)
 
     val sqlContext = new SQLContext(sc)
-    import sqlContext.createSchemaRDD
-    
-    /* Spark SQL requires case classes or classes implementing the Product interface to be able to use them as table schema */
-    case class DividendRecord(exchange: String, symbol: String, date: String, dividends: Double)
-    def parseDividend(row: Array[String]) = new DividendRecord(row(0), row(1), row(2), row(3).toDouble)
+
+    def parseDividend(row: Array[String]) = Row(row(0), row(1), row(2), row(3).toDouble)
     
     // Create RDD with file contents                                                                                                                                                                                                                                           
     val dividends = sc.textFile(args(0)) // "../data/NYSE_dividends_A.csv"
@@ -33,8 +30,7 @@ object SparkSqlIntro{
     // Read second file                                                                                                                                                                                                                                                        
     val daily_prices = sc.textFile(args(0)) // "../data/NYSE_daily_prices_A.csv"
     
-    case class DailyPricesRecord(exchange: String, symbol: String, date: String, price_open: Double, price_high: Double, price_low: Double, price_close: Double, stock_volume: Double, price_adj_close: Double)
-    def parseDailyPrices(row: Array[String]) = new DailyPricesRecord(row(0), row(1), row(2), row(3).toDouble, row(4).toDouble, row(5).toDouble, row(6).toDouble, row(7).toDouble, row(8).toDouble)
+    def parseDailyPrices(row: Array[String]) = new Row(row(0), row(1), row(2), row(3).toDouble, row(4).toDouble, row(5).toDouble, row(6).toDouble, row(7).toDouble, row(8).toDouble)
     val daily_prices_schema = daily_prices.filter(!_.startsWith("exchange")).map(_.split(",")).map(parseDailyPrices(_))
     
     daily_prices_schema.registerTempTable("daily_prices")

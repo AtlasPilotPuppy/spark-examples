@@ -12,11 +12,9 @@ object LogAnalysis{
     val conf = new SparkConf().setAppName("Log Analysis")
     val sc = new SparkContext(conf)
     val sqlContext = new SQLContext(sc)
-    import sqlContext.createSchemaRDD
     
     val log_file = sc.textFile("../data/log_file.txt")
     val pattern = Pattern.compile("([^\"]\\S*|\".+?\")\\s*")
-    case class LogSchema(ip: String, date: String, url: String, status: String, time: String)
     
     val tokenize_row = (row: String) => {
       val matches = pattern.matcher(row)
@@ -26,8 +24,8 @@ object LogAnalysis{
       values
     }
     
-    val schema_from_row = (row: List[String]) => new LogSchema(row(0), row(1).replace("[", "").replace("]", ""),
-                                                               row(2).split(" ")(1).split("\\?")(0), row(3), row(4))
+    val schema_from_row = (row: List[String]) => Row(row(0), row(1).replace("[", "").replace("]", ""),
+                                                     row(2).split(" ")(1).split("\\?")(0), row(3), row(4))
     
     val rows  = log_file.map(tokenize_row)
     val schema_rows = rows.map(schema_from_row)
