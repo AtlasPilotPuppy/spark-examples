@@ -5,12 +5,16 @@ Latest version of spark can be downloaded at http://spark.apache.org/downloads.h
 
 to run the spark shell use:
 
-```./bin/spark-shell```
+```
+./bin/spark-shell
+```
 
 
 The pyspark shell can be started using:
 
-```./bin/pyspark```
+```
+./bin/pyspark
+```
 
 To run spark with IPython notebook you need to have IPython notebook installed.
 It can be installed using :
