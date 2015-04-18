@@ -37,14 +37,15 @@ IPYTHON_OPTS="notebook --pylab inline --notebook-dir=<directory sto store notebo
 sudo docker pull anantasty/ubuntu_spark_ipython:latest
 
 #or load from disk
-sudo docker load < ubuntu_spark_ipython
+sudo docker load < ubuntu_spark_ipython.tar
 
 # Find image id using 
 
 sudo docker images
 
 # Run Image using
-# -v arg takes local path and mounts it to path on container eg. -v ~/spark-examples:ipython will mount ~/spark-examples
+# -v arg takes local path and mounts it to path on container
+# eg. -v ~/spark-examples:ipython will mount ~/spark-examples
 # to /ipython on container
 
 sudo docker run -i -t -h sandbox -v $(pwd):/ipython -d <IMAGE_ID> -d
