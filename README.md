@@ -30,6 +30,11 @@ to run pyspark with ipython notebook:
 IPYTHON_OPTS="notebook --pylab inline --notebook-dir=<directory sto store notebooks>" MASTER=local[6] ./bin/pyspark --executor-memory=6G
 ```
 
+## Latest examples are in the ipython-notebook folder
+
+Once you have ipython-notebook setup with this direcory as the home
+you can access ipython notebook at port 8888 (default)
+
 ## Running examples with provided docker container
 
 ```
@@ -37,14 +42,15 @@ IPYTHON_OPTS="notebook --pylab inline --notebook-dir=<directory sto store notebo
 sudo docker pull anantasty/ubuntu_spark_ipython:latest
 
 #or load from disk
-sudo docker load < ubuntu_spark_ipython
+sudo docker load < ubuntu_spark_ipython.tar
 
 # Find image id using 
 
 sudo docker images
 
 # Run Image using
-# -v arg takes local path and mounts it to path on container eg. -v ~/spark-examples:ipython will mount ~/spark-examples
+# -v arg takes local path and mounts it to path on container
+# eg. -v ~/spark-examples:ipython will mount ~/spark-examples
 # to /ipython on container
 
 sudo docker run -i -t -h sandbox -v $(pwd):/ipython -d <IMAGE_ID> -d
