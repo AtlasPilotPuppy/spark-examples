@@ -30,6 +30,11 @@ to run pyspark with ipython notebook:
 IPYTHON_OPTS="notebook --pylab inline --notebook-dir=<directory sto store notebooks>" MASTER=local[6] ./bin/pyspark --executor-memory=6G
 ```
 
+## Latest examples are in the ipython-notebook folder
+
+Once you have ipython-notebook setup with this direcory as the home
+you can access ipython notebook at port 8888 (default)
+
 ## Running examples with provided docker container
 
 ```
